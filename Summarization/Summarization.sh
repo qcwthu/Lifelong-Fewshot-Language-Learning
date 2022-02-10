@@ -41,6 +41,7 @@ do
               --warmup_steps 0.01 \
               --use_lm_adapted 1 \
               --lm_adapted_path  /data/qin/lm_adapted_t5model/torch_ckpt/large/pytorch_model.bin \
+              --cache_path /data/qin/cache/ \
               --prompt_number 300 \
               --ifckpt_onlymodel 1
             echo "++++++++++++++++++++++++++++++"

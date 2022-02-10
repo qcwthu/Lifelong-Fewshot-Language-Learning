@@ -1,5 +1,4 @@
 import os
-#os.environ['TRANSFORMERS_CACHE'] = '/data/qin/cache/'
 import argparse
 import gc
 gc.enable()
@@ -207,7 +206,7 @@ def test(args, test_dataset,onerun):
     test_dataloader = get_dataloader(args.num_workers, test_dataset, args.test_size_per_gpu, args.max_length,
                                       test_dataset.tokenizer.pad_token_id, test_sampler)
 
-    t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir="/data/qin/cache/")
+    t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir=args.cache_path)
     model = T5forClassify(args, t5model, tokenizer)
     allckpt = torch.load(args.tosavepath +  "/" + args.taskfold + "/" + str(onerun) + "/bestckpt")
     model.promptnumber = allckpt["promptnumber"]
@@ -316,6 +315,9 @@ if __name__ == "__main__":
     parser.add_argument("--lm_adapted_path", dest="lm_adapted_path", type=str,
                         default="../t5_ckpt_1_0622_bak/t5_ckpt/ckpt_of_step_100000",
                         help="The path of lm_adapted model")
+    parser.add_argument("--cache_path", dest="cache_path", type=str,
+                        default="/data/qin/cache/",
+                        help="The path of huggingface cache")
     parser.add_argument("--prompt_number", dest="prompt_number", type=int,
                         default=100, help="The number of prompt")
     parser.add_argument("--ifckpt_onlymodel", dest="ifckpt_onlymodel", type=int,
@@ -399,7 +401,7 @@ if __name__ == "__main__":
             os.mkdir(newfilefolder)
         if not os.path.exists(memdatafolder):
             os.mkdir(memdatafolder)
-        tokenizer = T5Tokenizer.from_pretrained(args.model_name, cache_dir="/data/qin/cache/")
+        tokenizer = T5Tokenizer.from_pretrained(args.model_name, cache_dir=args.cache_path)
         answertoken = "__ans__"
         special_tokens = {"ans_token": answertoken}
         tokenizer.add_tokens(list(special_tokens.values()))
@@ -413,7 +415,7 @@ if __name__ == "__main__":
             thistaskname = newtaskname[j]
             thistaskfold = newtaskfold[j]
             args.taskfold = thistaskfold
-            t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir="/data/qin/cache/")
+            t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir=args.cache_path)
             model = T5forClassify(args, t5model, tokenizer)
             if j == 0:
                 promptnumber = args.prompt_number
