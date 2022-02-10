@@ -370,7 +370,6 @@ if __name__ == "__main__":
         torch.distributed.barrier()
 
     for onerun in range(0, runtimes):
-        ##filecopynum[onerun], numberreturnseq[onerun]
         logger.info(onerun)
         args.seed = initialseed + onerun * 100
         seed_everything(args)
