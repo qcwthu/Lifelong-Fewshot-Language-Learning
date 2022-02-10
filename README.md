@@ -14,7 +14,6 @@ Accepted at 10th  International Conference on Learning Representations (ICLR'22)
 ```
 git clone git@github.com:qcwthu/Lifelong-Fewshot-Language-Learning.git
 cd Lifelong-Fewshot-Language-Learning
-
 ```
 
 ### 2. Install dependencies
@@ -28,7 +27,6 @@ conda create --name lfll_1 python=3.9.4
 conda activate lfll_1
 pip install numpy==1.19.5
 conda install pytorch==1.7.1 cudatoolkit=11.0 -c pytorch
-
 ```
 
 #### 2.2. Download LM-adapted T5 model
@@ -38,11 +36,10 @@ To run lifelong few-shot language learning with prompt tuning, you should downlo
 ```
 mkdir lm_adapted_t5model
 cd lm_adapted_t5model
-
 ```
 Then you should follow [gsutil_install](https://cloud.google.com/storage/docs/gsutil_install) to install gsutil. 
 
-After installing gsutil, run
+After installing gsutil, run 
 
 ```
 gsutil -m cp \
@@ -63,7 +60,6 @@ Finally,
 
 ```
 cd ..
-
 ```
 
 ## Citation
