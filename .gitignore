@@ -14,6 +14,13 @@ NER/Conll2Onto_2/t5ner_cl_ckpt
 NER/Onto2Conll_1/*log*
 NER/Onto2Conll_1/__pycache__
 NER/Onto2Conll_1/t5ner_cl_ckpt
+Summarization/*log*
+Summarization/memdata
+Summarization/newdata
+Summarization/__pycache__
+Summarization/t5_sum_ckpt
+Summarization/temptest.txt
+
 
 
 
