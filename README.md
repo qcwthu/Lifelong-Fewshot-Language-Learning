@@ -27,6 +27,7 @@ conda create --name lfll_1 python=3.9.4
 conda activate lfll_1
 pip install gpustat
 pip install seqeval==1.2.2
+pip install matplotlib==3.3.4
 pip install numpy==1.19.5
 pip install torch==1.7.1+cu110 -f https://download.pytorch.org/whl/torch_stable.html
 cd transformers; pip install .; cd ..
@@ -34,7 +35,6 @@ pip install tensorflow==2.5.0
 pip install fairscale==0.3.7
 pip install datasets==1.11.0
 pip install sentencepiece==0.1.95
-pip install matplotlib==3.3.4
 ```
 For Summarization & Different task types:
 
@@ -106,14 +106,14 @@ bash Summarization.sh
 ```
 
 #### 3.4. Different task types
-Without forward knowledge transfer (FKD):
+Without forward knowledge transfer:
 
 ```
 cd DiffType/T5NoContinual
 bash T5NoContinual.sh
 ```
 
-With forward knowledge transfer (FKD):
+With forward knowledge transfer:
 
 ```
 cd DiffType/T5WithContinual
@@ -126,6 +126,9 @@ bash T5WithContinual.sh
 ## Citation
 
 If you find our paper or this project helps your research, please kindly consider citing our paper in your publication.
+
+
+
 
 ```
 @inproceedings{
