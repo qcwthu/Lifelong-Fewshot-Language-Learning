@@ -27,6 +27,10 @@ conda create --name lfll_1 python=3.9.4
 conda activate lfll_1
 pip install numpy==1.19.5
 conda install pytorch==1.7.1 cudatoolkit=11.0 -c pytorch
+cd transformers
+pip install .
+cd ..
+pip install tensorflow==2.5.0
 ```
 
 #### 2.2. Download LM-adapted T5 model
@@ -60,6 +64,8 @@ Finally,
 
 ```
 cd ..
+mkdir lm_adapted_t5model/torch_ckpt
+python convertmodel.py
 ```
 
 ## Citation
