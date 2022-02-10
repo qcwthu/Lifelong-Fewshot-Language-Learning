@@ -317,7 +317,7 @@ def testner(args, test_ner, onerun):
     test_dataloader = get_dataloader(args.num_workers, test_ner, args.test_size_per_gpu, args.max_length,
                                       test_ner.tokenizer.pad_token_id,test_sampler)
 
-    t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir="/data/qin/cache/")
+    t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir=args.cache_path)
     model = T5forAll(args, t5model, test_ner.tokenizer)
 
     allckpt = torch.load(args.tosavepath + "/" + "NER" + "/" + str(onerun) + "/bestckpt")
@@ -356,7 +356,7 @@ def testclass(args, test_class, onerun):
     test_dataloader = get_dataloader(args.num_workers, test_class, args.test_size_per_gpu, args.max_length,
                                       test_class.tokenizer.pad_token_id, test_sampler)
 
-    t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir="/data/qin/cache/")
+    t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir=args.cache_path)
     model = T5forAll(args, t5model, test_class.tokenizer)
 
     allckpt = torch.load(args.tosavepath + "/" + "Class" + "/" + str(onerun) + "/bestckpt")
@@ -401,7 +401,7 @@ def testsum(args, test_sum, onerun):
     test_dataloader = get_dataloader(args.num_workers, test_sum, args.test_size_per_gpu, args.max_length,
                                       test_sum.tokenizer.pad_token_id,test_sampler)
 
-    t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir="/data/qin/cache/")
+    t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir=args.cache_path)
     model = T5forAll(args, t5model, test_sum.tokenizer)
 
     allckpt = torch.load(args.tosavepath + "/" + "Sum" + "/" + str(onerun) + "/bestckpt")
@@ -512,6 +512,9 @@ if __name__ == "__main__":
     parser.add_argument("--lm_adapted_path", dest="lm_adapted_path", type=str,
                         default="../t5_ckpt_1_0622_bak/t5_ckpt/ckpt_of_step_100000",
                         help="The path of lm_adapted model")
+    parser.add_argument("--cache_path", dest="cache_path", type=str,
+                        default="/data/qin/cache/",
+                        help="The path of huggingface cache")
     parser.add_argument("--prompt_number", dest="prompt_number", type=int,
                         default=100, help="The number of prompt")
     parser.add_argument("--ifckpt_onlymodel", dest="ifckpt_onlymodel", type=int,
@@ -569,7 +572,7 @@ if __name__ == "__main__":
         logger.info(thistaskname)
         args.taskfold = "Multitask"
 
-        tokenizer = T5Tokenizer.from_pretrained(args.model_name, cache_dir="/data/qin/cache/")
+        tokenizer = T5Tokenizer.from_pretrained(args.model_name, cache_dir=args.cache_path)
         gentasktoken = allgentasktoken[oneindex]
         tokenizer.add_tokens(gentasktoken)
         logger.info('gen token = {} , gen token id = {}'.format(gentasktoken,tokenizer.convert_tokens_to_ids(gentasktoken)))
@@ -602,7 +605,7 @@ if __name__ == "__main__":
             logger.error("big error!!!!!!!!!!!!!!!!!!")
             exit -1
 
-        t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir="/data/qin/cache/")
+        t5model = T5ForConditionalGeneration.from_pretrained(args.model_name, cache_dir=args.cache_path)
         model = T5forAll(args, t5model, tokenizer)
         ifcontinual = False
         if touseindex == 0:
