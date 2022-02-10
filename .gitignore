@@ -4,5 +4,16 @@ Classification/newdata
 Classification/__pycache__
 Classification/t5_classify_ckpt
 Classification/temptest.txt
+NER/*log*
+NER/Conll2Onto_1/*log*
+NER/Conll2Onto_1/__pycache__
+NER/Conll2Onto_1/t5ner_cl_ckpt
+NER/Conll2Onto_2/*log*
+NER/Conll2Onto_2/__pycache__
+NER/Conll2Onto_2/t5ner_cl_ckpt
+NER/Onto2Conll_1/*log*
+NER/Onto2Conll_1/__pycache__
+NER/Onto2Conll_1/t5ner_cl_ckpt
+
 
 
