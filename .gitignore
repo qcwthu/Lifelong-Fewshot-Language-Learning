@@ -20,6 +20,15 @@ Summarization/newdata
 Summarization/__pycache__
 Summarization/t5_sum_ckpt
 Summarization/temptest.txt
+DiffType/T5NoContinual/*log*
+DiffType/T5NoContinual/getfewshotdata_new.py
+DiffType/T5NoContinual/__pycache__
+DiffType/T5NoContinual/t5_pt_ckpt
+DiffType/T5WithContinual/*log*
+DiffType/T5WithContinual/getfewshotdata_new.py
+DiffType/T5WithContinual/__pycache__
+DiffType/T5WithContinual/t5_pt_ckpt
+
 
 
 
