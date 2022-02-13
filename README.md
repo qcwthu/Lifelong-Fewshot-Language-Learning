@@ -41,8 +41,19 @@ For Summarization & Different task types:
 ```
 conda create --name lfll_2 python=3.9.4
 conda activate lfll_2
+conda instal matplotlib=3.5.0
+pip install scikit-learn==1.0.2
 pip install gpustat
+pip install tensorflow==2.5.0
 pip install seqeval==1.2.2
+pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+cd transformers; pip install .; cd ..
+pip install fairscale==0.4.4
+pip install datasets==1.17.0
+pip install sentencepiece==0.1.96
+pip install more_itertools==8.12.0
+pip install rouge-score==0.0.4
+pip install rouge==1.0.1
 ```
 
 #### 2.2. Download LM-adapted T5 model

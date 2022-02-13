@@ -1,7 +1,6 @@
 learnrate=(5e-1)
 alllambda=(0.10)
-#allkd=(0.03)
-allkd=(0.005)
+allkd=(0.03)
 
 for onerate in ${learnrate[@]}
 do
@@ -11,7 +10,7 @@ do
       do
           echo "------------------------------"
           python -m torch.distributed.launch --nproc_per_node 1 --master_port 29533 NER_Conll2Onto_2.py \
-            --cuda 5 \
+            --cuda 6 \
             --lr $onerate \
             --lm_lambda $onelambda \
             --kd_lamda $onekd \
@@ -21,12 +20,12 @@ do
             --valid_size_per_gpu 16 \
             --test_size_per_gpu 16 \
             --gradient_accumulation_steps 4 \
-            --max_epoch 420 \
+            --max_epoch 320 \
             --num_workers 4 \
             --save_step 100000 \
             --eval_step 100000 \
             --save_dir t5ner_pseudo_ckpt \
-            --seed 42 \
+            --seed 100 \
             --model T5NER \
             --model_name google/t5-v1_1-large \
             --train_file_name ./ontonotes_fewshot/train.txt \

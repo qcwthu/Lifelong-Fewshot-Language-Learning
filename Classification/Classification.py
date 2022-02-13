@@ -369,7 +369,7 @@ if __name__ == "__main__":
     if args.local_rank != -1:
         torch.distributed.barrier()
 
-    for onerun in range(0, runtimes):
+    for onerun in range(2, runtimes):
         logger.info(onerun)
         args.seed = initialseed + onerun * 100
         seed_everything(args)
@@ -496,7 +496,7 @@ if __name__ == "__main__":
                     f.close()
                     pretestdataset = T5SenClassifyDatasetConll(tempfile, args.max_length, tokenizer, newtgentasktokens, answertoken, aa)
                     pretestsampler = SequentialSampler(pretestdataset)
-                    pretestdataloader = get_dataloader(args.num_workers, pretestdataset, 32, args.max_length,
+                    pretestdataloader = get_dataloader(args.num_workers, pretestdataset, 24, args.max_length,
                                                      pretestdataset.tokenizer.pad_token_id, pretestsampler)
                     model.eval()
                     allsampleonetask = {}
@@ -619,10 +619,12 @@ if __name__ == "__main__":
 
             logger.info("Finish prepare model and dataset")
             logger.info("Start training")
-            if onerun != 0 or j > 0:
+            #if onerun != 0 or j > 0:
+            if j > 0:
                 train(args, model, train_dataset, valid_dataset, onerun)
             logger.info("Finish training")
-            if args.local_rank in [0, -1] and (onerun != 0 or j > 0):
+            #if args.local_rank in [0, -1] and (onerun != 0 or j > 0):
+            if args.local_rank in [0, -1] and j > 0:
                 logger.info("Start testing")
                 logger.info("Testing...")
                 test(args, test_dataset, onerun)
