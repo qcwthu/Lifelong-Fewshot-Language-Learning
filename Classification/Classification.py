@@ -364,8 +364,8 @@ if __name__ == "__main__":
     tasknum = len(alltaskfold)
     dataprefix = "./textclassificationdata/"
     fewshotnum = 16
-    filecopynum = [1,4,4]
-    numberreturnseq = [3,6,12]
+    filecopynum = [1,3,4]
+    numberreturnseq = [3,12,12]
     if args.local_rank != -1:
         torch.distributed.barrier()
 

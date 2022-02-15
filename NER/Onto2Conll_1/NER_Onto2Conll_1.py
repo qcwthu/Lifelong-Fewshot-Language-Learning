@@ -336,7 +336,8 @@ def train(args, model, train_dataset,valid_dataset,test_dataset):
 
         logger.info("finish one epoch")
         if args.local_rank in [0, -1]:
-            if i >= 200:
+            #if i >= 200:
+            if i >= 180:
                 dooneeval(model,valid_dataloader,args,result_dict,optimizer,scaler,i)
                 model.train()
 

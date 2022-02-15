@@ -1,13 +1,16 @@
 learnrate=(5e-1)
 alllambda=(0.10)
-allkd=(0.06 0.03 0.05)
-
+#allkd=(0.06 0.03 0.05)
+allkd=(0.03)
+allepoch=(200 240 280 360 400 480)
 for onerate in ${learnrate[@]}
 do
   for onelambda in ${alllambda[@]}
   do
       for onekd in ${allkd[@]}
       do
+        for oneepoch in ${allepoch[@]}
+        do
           echo "------------------------------"
           python -m torch.distributed.launch --nproc_per_node 2 --master_port 29528 NER_Onto2Conll_1.py \
             --cuda 4,5 \
@@ -19,8 +22,8 @@ do
             --batch_size_per_gpu 2 \
             --valid_size_per_gpu 16 \
             --test_size_per_gpu 16 \
-            --gradient_accumulation_steps 4 \
-            --max_epoch 640 \
+            --gradient_accumulation_steps 2 \
+            --max_epoch $oneepoch \
             --num_workers 4 \
             --save_step 100000 \
             --eval_step 100000 \
@@ -45,7 +48,8 @@ do
             --pre_prompt_path  ./onto_ckpt/onto_ckpt
           echo "++++++++++++++++++++++++++++++"
           ps aux | grep NER_Onto2Conll_1.py | awk '{print $2}' | xargs kill -9
-    done
+        done
+      done
   done
 done
 

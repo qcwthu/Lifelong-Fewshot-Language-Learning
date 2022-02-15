@@ -27,7 +27,7 @@ do
             --save_step 100000 \
             --eval_step 100000 \
             --save_dir t5ner_pseudo_ckpt \
-            --seed 100 \
+            --seed 42 \
             --model T5NER \
             --model_name google/t5-v1_1-large \
             --train_file_name ./ontonotes_fewshot/train.txt \
