@@ -347,9 +347,7 @@ if __name__ == "__main__":
             f.write(str(time.ctime()) + "\n")
             f.write(str(args) + "\n")
             f.write("----------------------------------------------------------------------------\n")
-    #4 3 3 3 2
     runtimes = 3
-    #runtimes = 1
     alltaskfold = ["ag_news_csv", "amazon_review_full_csv", "dbpedia_csv", "yahoo_answers_csv"]
     alltaskname = ["ag news", "amazon review", "dbpedia", "yahoo answers"]
     allgentasktoken = ["classifyagnews", "classifyamazon", "classifydbpedia", "classifyyahoo"]
@@ -369,7 +367,7 @@ if __name__ == "__main__":
     if args.local_rank != -1:
         torch.distributed.barrier()
 
-    for onerun in range(2, runtimes):
+    for onerun in range(0, runtimes):
         logger.info(onerun)
         args.seed = initialseed + onerun * 100
         seed_everything(args)
@@ -619,12 +617,9 @@ if __name__ == "__main__":
 
             logger.info("Finish prepare model and dataset")
             logger.info("Start training")
-            #if onerun != 0 or j > 0:
-            if j > 0:
-                train(args, model, train_dataset, valid_dataset, onerun)
+            train(args, model, train_dataset, valid_dataset, onerun)
             logger.info("Finish training")
-            #if args.local_rank in [0, -1] and (onerun != 0 or j > 0):
-            if args.local_rank in [0, -1] and j > 0:
+            if args.local_rank in [0, -1]:
                 logger.info("Start testing")
                 logger.info("Testing...")
                 test(args, test_dataset, onerun)
