@@ -1,6 +1,6 @@
 learnrate=(5e-1)
 alllambda=(0.10)
-allkd=(0.06)
+allkd=(0.03)
 allepoch=(320)
 for onerate in ${learnrate[@]}
 do
@@ -11,17 +11,17 @@ do
         for oneepoch in ${allepoch[@]}
         do
           echo "------------------------------"
-          python -m torch.distributed.launch --nproc_per_node 2 --master_port 29528 NER_Onto2Conll_1.py \
-            --cuda 6,7 \
+          python -m torch.distributed.launch --nproc_per_node 1 --master_port 29528 NER_Onto2Conll_1.py \
+            --cuda 6 \
             --lr $onerate \
             --lm_lambda $onelambda \
             --kd_lamda $onekd \
             --weight_decay 1e-5 \
             --max_grad_norm 1.0 \
-            --batch_size_per_gpu 2 \
+            --batch_size_per_gpu 4 \
             --valid_size_per_gpu 16 \
             --test_size_per_gpu 16 \
-            --gradient_accumulation_steps 4 \
+            --gradient_accumulation_steps 2 \
             --max_epoch $oneepoch \
             --num_workers 4 \
             --save_step 100000 \
